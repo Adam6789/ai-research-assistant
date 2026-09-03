@@ -17,7 +17,7 @@ class SynthesisAgent(LlmAgent):
     Pattern: LlmAgent for knowledge synthesis
     """
 
-    def __init__(self, model: str = "gemini-2.0-flash"):
+    def __init__(self, model: str = "gemini-2.5-flash"):
         """Initialize the synthesis agent.
 
         Args:
@@ -75,7 +75,7 @@ class CitationAgent(LlmAgent):
     Pattern: LlmAgent for formatting tasks
     """
 
-    def __init__(self, model: str = "gemini-2.0-flash"):
+    def __init__(self, model: str = "gemini-2.5-flash"):
         """Initialize the citation agent.
 
         Args:

@@ -11,7 +11,7 @@ class ResearcherAgent(LlmAgent):
 
     """
 
-    def __init__(self, model: str = "gemini-2.0-flash"):
+    def __init__(self, model: str = "gemini-2.5-flash"):
         """Initialize the researcher agent.
 
         Args:
@@ -107,7 +107,7 @@ class ResearchCriticAgent(LlmAgent):
 
     """
 
-    def __init__(self, model: str = "gemini-2.0-flash"):
+    def __init__(self, model: str = "gemini-2.5-flash"):
         """Initialize the critic agent.
 
         Args:
@@ -207,7 +207,7 @@ Confidence: {answer.get('confidence', 'unknown')}"""
             }
 
 
-def create_research_loop_agent(model: str = "gemini-2.0-flash",
+def create_research_loop_agent(model: str = "gemini-2.5-flash",
                                 max_iterations: int = 3) -> LoopAgent:
     """
     Creates a LoopAgent for iterative research refinement.
@@ -235,7 +235,7 @@ async def execute_research_loop(
     client: genai.Client,
     query: str,
     max_iterations: int = 3,
-    model: str = "gemini-2.0-flash"
+    model: str = "gemini-2.5-flash"
 ) -> Dict[str, Any]:
     """
     Execute iterative research refinement using ADK LoopAgent.

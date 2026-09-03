@@ -8,7 +8,7 @@ from google.genai.types import GenerateContentConfig
 class DomainClassifierAgent(LlmAgent):
     """Classifies research queries into domains."""
 
-    def __init__(self, model: str = "gemini-2.0-flash"):
+    def __init__(self, model: str = "gemini-2.5-flash"):
         """Initialize domain classifier.
 
         Args:
@@ -98,7 +98,7 @@ Output format (JSON):
 class FactCheckAgent(LlmAgent):
     """Validates research claims for accuracy (ADK LlmAgent)."""
 
-    def __init__(self, model: str = "gemini-2.0-flash"):
+    def __init__(self, model: str = "gemini-2.5-flash"):
         """Initialize fact checker.
 
         Args:
@@ -184,7 +184,7 @@ Key Points: {json.dumps(answer.get('key_points', []))}
 class SynthesisAgent(LlmAgent):
     """Synthesizes research findings into coherent narrative (ADK LlmAgent)."""
 
-    def __init__(self, model: str = "gemini-2.0-flash"):
+    def __init__(self, model: str = "gemini-2.5-flash"):
         """Initialize synthesis agent.
 
         Args:
@@ -277,7 +277,7 @@ Top Sources: {len(sources.get('aggregated_sources', {}).get('top_sources', []))}
 class CitationAgent(LlmAgent):
     """Generates properly formatted citations (ADK LlmAgent)."""
 
-    def __init__(self, model: str = "gemini-2.0-flash"):
+    def __init__(self, model: str = "gemini-2.5-flash"):
         """Initialize citation agent.
 
         Args:

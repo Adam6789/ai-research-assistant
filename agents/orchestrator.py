@@ -16,7 +16,7 @@ async def execute_research_workflow(
     client: genai.Client,
     query: str,
     max_iterations: int = 3,
-    model: str = "gemini-2.0-flash"
+    model: str = "gemini-2.5-flash"
 ) -> Dict[str, Any]:
     """
     Execute complete research assistant workflow.

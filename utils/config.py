@@ -18,7 +18,7 @@ class Config:
         # GCP Configuration
         self.project_id = os.getenv("PROJECT_ID", "")
         self.location = os.getenv("LOCATION", "us-central1")
-        self.model_name = os.getenv("MODEL_NAME", "gemini-2.0-flash")
+        self.model_name = os.getenv("MODEL_NAME", "gemini-2.5-flash")
 
         # Research Settings
         self.max_iterations = int(os.getenv("MAX_ITERATIONS", "3"))
