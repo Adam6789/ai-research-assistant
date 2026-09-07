@@ -3,7 +3,8 @@ import asyncio
 from typing import Dict, Any, List
 from google.adk.agents import LlmAgent, ParallelAgent, SequentialAgent
 from google import genai
-from google.genai.types import GenerateContentConfig
+from google.genai.types import GenerateContentConfig, ThinkingConfig
+from google.adk.planners import BuiltInPlanner
 
 
 class WebSearchAgent(LlmAgent):
@@ -41,8 +42,13 @@ Output format (JSON):
             instruction=instruction,
             generate_content_config=GenerateContentConfig(
                 temperature=0.8,
-                max_output_tokens=1024,
+                max_output_tokens=3000,
                 response_mime_type="application/json"
+            ),
+            planner=BuiltInPlanner(
+                thinking_config=ThinkingConfig(
+                    thinking_budget=512
+                )
             )
         )
 
@@ -55,9 +61,8 @@ Output format (JSON):
             contents=prompt,
             config=self.generate_content_config
         )
-
         try:
-            result = json.loads(response.text)
+            result = json.loads(response.candidates[0].content.parts[0].text)
             result['_metadata'] = {
                 'agent': self.name,
                 'source_type': 'web',
@@ -111,8 +116,13 @@ Output format (JSON):
             instruction=instruction,
             generate_content_config=GenerateContentConfig(
                 temperature=0.8,
-                max_output_tokens=1024,
+                max_output_tokens=3000,
                 response_mime_type="application/json"
+            ),
+            planner=BuiltInPlanner(
+                thinking_config=ThinkingConfig(
+                    thinking_budget=512
+                )
             )
         )
 
@@ -127,7 +137,7 @@ Output format (JSON):
         )
 
         try:
-            result = json.loads(response.text)
+            result = json.loads(response.candidates[0].content.parts[0].text)
             result['_metadata'] = {
                 'agent': self.name,
                 'source_type': 'arxiv',
@@ -183,8 +193,13 @@ Output format (JSON):
             instruction=instruction,
             generate_content_config=GenerateContentConfig(
                 temperature=0.8,
-                max_output_tokens=1024,
+                max_output_tokens=3000,
                 response_mime_type="application/json"
+            ),
+            planner=BuiltInPlanner(
+                thinking_config=ThinkingConfig(
+                    thinking_budget=512
+                )
             )
         )
 
@@ -199,7 +214,7 @@ Output format (JSON):
         )
 
         try:
-            result = json.loads(response.text)
+            result = json.loads(response.candidates[0].content.parts[0].text)
             result['_metadata'] = {
                 'agent': self.name,
                 'source_type': 'scholar',
