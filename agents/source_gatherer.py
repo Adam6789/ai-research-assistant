@@ -5,6 +5,19 @@ from google.adk.agents import LlmAgent, ParallelAgent, SequentialAgent
 from google import genai
 from google.genai.types import GenerateContentConfig, ThinkingConfig
 from google.adk.planners import BuiltInPlanner
+import os
+
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
+SIMULATION = os.getenv("SIMULATION")
+
+if SIMULATION == True:
+    MAX_OUTPUT_TOKENS_SEARCH = 1024
+else:
+    MAX_OUTPUT_TOKENS_SEARCH = 3000
+print(MAX_OUTPUT_TOKENS_SEARCH)
 
 
 class WebSearchAgent(LlmAgent):
@@ -42,7 +55,7 @@ Output format (JSON):
             instruction=instruction,
             generate_content_config=GenerateContentConfig(
                 temperature=0.8,
-                max_output_tokens=3000,
+                max_output_tokens=MAX_OUTPUT_TOKENS_SEARCH,
                 response_mime_type="application/json"
             ),
             planner=BuiltInPlanner(
@@ -116,7 +129,7 @@ Output format (JSON):
             instruction=instruction,
             generate_content_config=GenerateContentConfig(
                 temperature=0.8,
-                max_output_tokens=3000,
+                max_output_tokens=MAX_OUTPUT_TOKENS_SEARCH,
                 response_mime_type="application/json"
             ),
             planner=BuiltInPlanner(
@@ -193,7 +206,7 @@ Output format (JSON):
             instruction=instruction,
             generate_content_config=GenerateContentConfig(
                 temperature=0.8,
-                max_output_tokens=3000,
+                max_output_tokens=MAX_OUTPUT_TOKENS_SEARCH,
                 response_mime_type="application/json"
             ),
             planner=BuiltInPlanner(
