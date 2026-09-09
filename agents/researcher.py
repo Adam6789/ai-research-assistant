@@ -2,7 +2,9 @@ import json
 from typing import Dict, Any, List
 from google.adk.agents import LlmAgent, LoopAgent
 from google import genai
-from google.genai.types import GenerateContentConfig
+from google.genai.types import GenerateContentConfig, ThinkingConfig
+from google.adk.planners import BuiltInPlanner
+from utils.vars import MAX_OUTPUT_TOKENS_SEARCH
 
 
 class ResearcherAgent(LlmAgent):
@@ -43,9 +45,14 @@ Focus on accuracy, clarity, and continuous improvement. Each iteration should sh
             model=model,
             instruction=instruction,
             generate_content_config=GenerateContentConfig(
-                temperature=0.7,
-                max_output_tokens=1024,
+                temperature=0.8,
+                max_output_tokens=MAX_OUTPUT_TOKENS_SEARCH,
                 response_mime_type="application/json"
+            ),
+            planner=BuiltInPlanner(
+                thinking_config=ThinkingConfig(
+                    thinking_budget=512
+                )
             )
         )
 
@@ -80,7 +87,7 @@ Focus on accuracy, clarity, and continuous improvement. Each iteration should sh
 
         # Parse JSON response
         try:
-            result = json.loads(response.text)
+            result = json.loads(response.candidates[0].content.parts[0].text)
             result['_metadata'] = {
                 'agent': self.name,
                 'model': self.model,
@@ -89,7 +96,7 @@ Focus on accuracy, clarity, and continuous improvement. Each iteration should sh
             return result
         except json.JSONDecodeError:
             return {
-                'answer': response.text,
+                'answer': response,
                 'key_points': [],
                 'sources_mentioned': [],
                 'confidence': 'low',
@@ -148,9 +155,14 @@ Otherwise set should_stop=false to trigger another iteration."""
             model=model,
             instruction=instruction,
             generate_content_config=GenerateContentConfig(
-                temperature=0.3,
-                max_output_tokens=768,
+                temperature=0.8,
+                max_output_tokens=MAX_OUTPUT_TOKENS_SEARCH,
                 response_mime_type="application/json"
+            ),
+            planner=BuiltInPlanner(
+                thinking_config=ThinkingConfig(
+                    thinking_budget=512
+                )
             )
         )
 
@@ -184,7 +196,7 @@ Confidence: {answer.get('confidence', 'unknown')}"""
         )
 
         try:
-            result = json.loads(response.text)
+            result = json.loads(response.candidates[0].content.parts[0].text)
             result['_metadata'] = {
                 'agent': self.name,
                 'model': self.model,
