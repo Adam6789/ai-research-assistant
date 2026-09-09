@@ -299,7 +299,7 @@ user: Please aggregate these search results:
         )
 
         try:
-            result = json.loads(response.text)
+            result = json.loads(response.candidates[0].content.parts[0].text)
             result['_metadata'] = {
                 'agent': self.name,
                 'execution': 'direct_genai_client',
