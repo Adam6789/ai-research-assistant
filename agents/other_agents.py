@@ -77,7 +77,7 @@ Output format (JSON):
         )
 
         try:
-            result = json.loads(response.text)
+            result = json.loads(response.candidates[0].content.parts[0].text)
             result['_metadata'] = {
                 'agent': self.name,
                 'execution': 'direct_genai_client'
@@ -163,7 +163,7 @@ Key Points: {json.dumps(answer.get('key_points', []))}
         )
 
         try:
-            result = json.loads(response.text)
+            result = json.loads(response.candidates[0].content.parts[0].text)
             result['_metadata'] = {
                 'agent': self.name,
                 'execution': 'direct_genai_client'
@@ -256,7 +256,7 @@ Top Sources: {len(sources.get('aggregated_sources', {}).get('top_sources', []))}
         )
 
         try:
-            result = json.loads(response.text)
+            result = json.loads(response.candidates[0].content.parts[0].text)
             result['_metadata'] = {
                 'agent': self.name,
                 'execution': 'direct_genai_client'
@@ -342,7 +342,7 @@ user: Generate citations for these sources:
         )
 
         try:
-            result = json.loads(response.text)
+            result = json.loads(response.candidates[0].content.parts[0].text)
             result['_metadata'] = {
                 'agent': self.name,
                 'execution': 'direct_genai_client'
