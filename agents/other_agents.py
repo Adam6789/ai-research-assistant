@@ -2,7 +2,9 @@ import json
 from typing import Dict, Any
 from google.adk.agents import LlmAgent
 from google import genai
-from google.genai.types import GenerateContentConfig
+from google.genai.types import GenerateContentConfig, ThinkingConfig
+from google.adk.planners import BuiltInPlanner
+from utils.vars import MAX_OUTPUT_TOKENS_SEARCH
 
 
 class DomainClassifierAgent(LlmAgent):
@@ -50,8 +52,13 @@ Output format (JSON):
             instruction=instruction,
             generate_content_config=GenerateContentConfig(
                 temperature=0.3,
-                max_output_tokens=512,
+                max_output_tokens=MAX_OUTPUT_TOKENS_SEARCH,
                 response_mime_type="application/json"
+            ),
+            planner=BuiltInPlanner(
+                thinking_config=ThinkingConfig(
+                    thinking_budget=512
+                )
             )
         )
 
@@ -129,8 +136,13 @@ Output format (JSON):
             instruction=instruction,
             generate_content_config=GenerateContentConfig(
                 temperature=0.3,
-                max_output_tokens=1024,
+                max_output_tokens=MAX_OUTPUT_TOKENS_SEARCH,
                 response_mime_type="application/json"
+            ),
+            planner=BuiltInPlanner(
+                thinking_config=ThinkingConfig(
+                    thinking_budget=512
+                )
             )
         )
 
@@ -216,8 +228,13 @@ Output format (JSON):
             instruction=instruction,
             generate_content_config=GenerateContentConfig(
                 temperature=0.7,
-                max_output_tokens=2048,
+                max_output_tokens=MAX_OUTPUT_TOKENS_SEARCH,
                 response_mime_type="application/json"
+            ),
+            planner=BuiltInPlanner(
+                thinking_config=ThinkingConfig(
+                    thinking_budget=512
+                )
             )
         )
 
@@ -312,8 +329,13 @@ Output format (JSON):
             instruction=instruction,
             generate_content_config=GenerateContentConfig(
                 temperature=0.1,
-                max_output_tokens=1536,
+                max_output_tokens=MAX_OUTPUT_TOKENS_SEARCH,
                 response_mime_type="application/json"
+            ),
+            planner=BuiltInPlanner(
+                thinking_config=ThinkingConfig(
+                    thinking_budget=512
+                )
             )
         )
 

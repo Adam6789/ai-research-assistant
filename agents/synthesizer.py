@@ -4,7 +4,9 @@ This module provides research synthesis and citation generation using LlmAgents.
 """
 
 from google.adk.agents import LlmAgent
-from google.genai.types import GenerateContentConfig
+from google.genai.types import GenerateContentConfig, ThinkingConfig
+from google.adk.planners import BuiltInPlanner
+from utils.vars import MAX_OUTPUT_TOKENS_SEARCH
 
 
 class SynthesisAgent(LlmAgent):
@@ -60,8 +62,13 @@ Create publication-quality research syntheses that are clear, accurate, and insi
             instruction=instruction,
             generate_content_config=GenerateContentConfig(
                 temperature=0.5,
-                max_output_tokens=2048,
+                max_output_tokens=MAX_OUTPUT_TOKENS_SEARCH,
                 response_mime_type="application/json"
+            ),
+            planner=BuiltInPlanner(
+                thinking_config=ThinkingConfig(
+                    thinking_budget=512
+                )
             )
         )
 
@@ -119,7 +126,12 @@ Generate accurate, properly formatted citations for all sources."""
             instruction=instruction,
             generate_content_config=GenerateContentConfig(
                 temperature=0.1,
-                max_output_tokens=1024,
+                max_output_tokens=MAX_OUTPUT_TOKENS_SEARCH,
                 response_mime_type="application/json"
+            ),
+            planner=BuiltInPlanner(
+                thinking_config=ThinkingConfig(
+                    thinking_budget=512
+                )
             )
         )

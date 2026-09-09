@@ -1,5 +1,7 @@
 from google.adk.agents import LlmAgent
-from google.genai.types import GenerateContentConfig
+from google.genai.types import GenerateContentConfig, ThinkingConfig
+from google.adk.planners import BuiltInPlanner
+from utils.vars import MAX_OUTPUT_TOKENS_SEARCH
 
 
 class DomainClassifierAgent(LlmAgent):
@@ -118,7 +120,12 @@ Use this to help allocate appropriate resources for each query."""
             instruction=instruction,
             generate_content_config=GenerateContentConfig(
                 temperature=0.2,
-                max_output_tokens=384,
+                max_output_tokens=MAX_OUTPUT_TOKENS_SEARCH,
                 response_mime_type="application/json"
+            ),
+            planner=BuiltInPlanner(
+                thinking_config=ThinkingConfig(
+                    thinking_budget=512
+                )
             )
         )

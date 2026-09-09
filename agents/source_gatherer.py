@@ -274,8 +274,13 @@ Select the top 10-15 most relevant sources."""
             instruction=instruction,
             generate_content_config=GenerateContentConfig(
                 temperature=0.3,
-                max_output_tokens=2048,
+                max_output_tokens=MAX_OUTPUT_TOKENS_SEARCH,
                 response_mime_type="application/json"
+            ),
+            planner=BuiltInPlanner(
+                thinking_config=ThinkingConfig(
+                    thinking_budget=512
+                )
             )
         )
 
