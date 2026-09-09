@@ -10,6 +10,7 @@ from agents.other_agents import (
     CitationAgent
 )
 from agents.evaluator import PerformanceEvaluator
+import inspect
 
 
 async def execute_research_workflow(
@@ -180,29 +181,15 @@ async def execute_research_workflow(
     # ========================================================================
     # STAGE 7: Performance Evaluation
     # ========================================================================
-    # TODO 8: Track workflow performance metrics 
-    #
-    # Instantiate PerformanceEvaluator and record the workflow results.
-    #
-    # Steps:
-    # 1. Calculate execution time
-    # 2. Create evaluator
-    # 3. Record metrics
-    # 4. Get summary
-    # 5. Add to workflow_results
    
     print("\n" + "-"*80)
     print("STAGE 7: Performance Evaluation")
     print("-"*80)
 
-    # TODO 8: Implement performance evaluation here
-    # Replace the None values below with actual implementation
+    execution_time = time.time() - start_time
+    evaluator = PerformanceEvaluator()
+    performance_summary = evaluator.analyze_performance()
 
-    execution_time = None  # REPLACE: Calculate execution time
-    evaluator = None       # REPLACE: Create PerformanceEvaluator instance
-    performance_summary = None  # REPLACE: Get performance summary after recording metrics
-
-    # This section will work once you complete TODO 8
     if execution_time and evaluator and performance_summary:
         print(f"   ✓ Execution Time: {execution_time:.2f}s")
         print(f"   ✓ Performance Score: {performance_summary['performance_score']:.2f}")
