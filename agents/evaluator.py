@@ -68,13 +68,20 @@ class PerformanceEvaluator:
             result: Query result dictionary
             processing_time: Time taken to process query
         """
+        quality = result["stage_3_research"]["iteration_history"][0]["evaluation"]["quality_score"]
+        sources = len(result["stage_2_sources"]["raw_searches"][0]["results"]) + len(result["stage_2_sources"]["raw_searches"][1]["results"]) + len(result["stage_2_sources"]["raw_searches"][2]["results"])
+        iterations = result["stage_3_research"]["iterations_run"]
+        fact_checks = len(result["stage_4_fact_check"]["verified_claims"])
+        citations = result["stage_6_citations"]["total_citations"]
+
+
         self.metrics.record_query(
-            quality=result.get("quality_score", 0.0),
+            quality=quality,
             time=processing_time,
-            sources=result.get("sources_found", 0),
-            iterations=result.get("iterations", 0),
-            fact_checks=result.get("fact_checks", 0),
-            citations=result.get("citations_count", 0)
+            sources=sources,
+            iterations=iterations,
+            fact_checks=fact_checks,
+            citations=citations
         )
 
     def analyze_performance(self) -> Dict[str, Any]:
@@ -105,7 +112,6 @@ class PerformanceEvaluator:
             bottlenecks.append("Slow response times - optimize source gathering")
         if summary["total_sources"] / max(summary["queries_processed"], 1) < 10:
             bottlenecks.append("Insufficient sources - expand search strategies")
-
         return {
             "metrics": summary,
             "health_status": health_status,
