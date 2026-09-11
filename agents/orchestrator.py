@@ -79,6 +79,7 @@ async def execute_research_workflow(
     # ========================================================================
     print("\n" + "-"*80)
     print("STAGE 2: Source Gathering")
+    print("time passed:", str(time.time() - start_time))
     print("-"*80)
 
     sources = await execute_source_gathering(client=client, query=query, model=model)
@@ -89,6 +90,7 @@ async def execute_research_workflow(
     # ========================================================================
     print("\n" + "-"*80)
     print("STAGE 3: Research Refinement")
+    print("time passed:", str(time.time() - start_time))
     print("-"*80)
 
     research = await execute_research_loop(
@@ -188,6 +190,7 @@ async def execute_research_workflow(
 
     execution_time = time.time() - start_time
     evaluator = PerformanceEvaluator()
+    evaluator.evaluate_query_result(workflow_results, execution_time)
     performance_summary = evaluator.analyze_performance()
 
     if execution_time and evaluator and performance_summary:
