@@ -1,0 +1,192 @@
+
+================================================================================
+AI RESEARCH ASSISTANT
+================================================================================
+
+ Configuration:
+   Project ID: lab16507702-1788328422
+   Location: us-central1
+   Model: gemini-2.5-flash
+
+🔧 Initializing genai.Client...
+   Using Vertex AI authentication...
+   ✓ Client initialized with Vertex AI
+
+📝 Sample Research Queries:
+   1. What are the latest advances in quantum computing error correction?
+   2. How does machine learning improve code review efficiency?
+   3. What are the health impacts of microplastics in marine ecosystems?
+   4. What are the latest types of computer memory?
+
+💡 To research a different topic:
+   • Edit queries list in main.py
+   • Or set RESEARCH_QUERY environment variable
+   • Example: export RESEARCH_QUERY='Your custom question here'
+
+🎯 Running custom research query...
+
+================================================================================
+AI RESEARCH ASSISTANT - EXECUTION
+================================================================================
+
+ Research Query: The impact of emperor Constantine the Great on the quality of Europe.
+   Pattern: SequentialAgent
+   Execution: (ADK agents + agent.run_async())
+   Model: gemini-2.5-flash
+
+--------------------------------------------------------------------------------
+STAGE 1: Domain Classification 
+--------------------------------------------------------------------------------
+   ✓ Domain: social_science
+   ✓ Confidence: 0.98
+   ✓ Complexity: high
+   ✓ Recommended sources: scholar, web, academic journals, historical archives, books
+
+--------------------------------------------------------------------------------
+STAGE 2: Source Gathering
+time passed: 4.010039806365967
+--------------------------------------------------------------------------------
+
+ Source Gathering: The impact of emperor Constantine the Great on the quality o...
+   Pattern: ADK ParallelAgent + SequentialAgent
+   Created SequentialAgent: CodePipelineAgent2
+   Type: SequentialAgent
+   Sub-agents: 2
+   Stage 1 (ParallelAgent): CodePipelineAgent1
+      → Type: ParallelAgent
+      → Sub-agents: 3 parallel searches
+   Stage 2 (Aggregator): source_aggregator
+
+   Executing workflow logic (execution)...
+
+   Stage 1: ParallelAgent (fan-out)
+      → web_search running...
+      ✓ web_search: Found 7 sources
+      → arxiv_search running...
+      ✓ arxiv_search: Found 7 sources
+      → scholar_search running...
+      ✓ scholar_search: Found 7 sources
+
+   Stage 2: Aggregator (fan-in)
+      → source_aggregator aggregating results...
+      ✓ Total: 21 sources
+      ✓ Unique: 21 sources
+      ✓ Top sources: 0
+   ✅ Workflow execution completed
+
+--------------------------------------------------------------------------------
+STAGE 3: Research Refinement
+time passed: 69.27396440505981
+--------------------------------------------------------------------------------
+
+ Research Loop: The impact of emperor Constantine the Great on the quality of Europe.
+   Max Iterations: 3
+   Created LoopAgent: research_refinement_loop
+   Type: LoopAgent
+   Sub-agents: 2 (researcher + critic)
+
+   🔄 Executing LoopAgent logic (execution)...
+
+   Iteration 1/3
+      → researcher generating answer...
+      ✓ Answer generated (confidence: high)
+      → critic evaluating quality...
+      ✓ Quality: excellent (score: 0.95)
+      Quality threshold met - Loop terminated
+   LoopAgent execution completed (1 iterations)
+
+--------------------------------------------------------------------------------
+STAGE 4: Fact Checking (LlmAgent)
+--------------------------------------------------------------------------------
+   ✓ Credibility Score: 0.95
+   ✓ Verified Claims: 23
+   ✓ Questionable Claims: 1
+
+--------------------------------------------------------------------------------
+STAGE 5: Synthesis (LlmAgent)
+--------------------------------------------------------------------------------
+   ✓ Synthesis completed
+   ✓ Key Insights: 4
+   ✓ Themes: 4
+   ✓ Coherence Score: 0.95
+
+--------------------------------------------------------------------------------
+STAGE 6: Citation Generation (LlmAgent)
+--------------------------------------------------------------------------------
+   ✓ Citations formatted
+   ✓ Total Citations: 0
+   ✓ Style: APA
+
+================================================================================
+WORKFLOW COMPLETED
+================================================================================
+
+. All 7 stages executed successfully
+
+. Results Summary:
+   • Query: The impact of emperor Constantine the Great on the quality of Europe.
+   • Domain: social_science
+   • Sources Found: 21
+   • Research Iterations: 1
+   • Credibility Score: 0.95
+   • Citations: 0
+
+  Execution Method:
+   ✓ All agents inherit from ADK base classes
+   ✓ Executed via agent.run_async() with genai.Client
+   ✓ No ADK server deployment required
+   ✓ Real LLM output from Vertex AI Gemini
+
+--------------------------------------------------------------------------------
+STAGE 7: Performance Evaluation
+--------------------------------------------------------------------------------
+   ✓ Execution Time: 122.71s
+   ✓ Performance Score: 0.95
+   ✓ Health Status: excellent
+   ✓ Queries Processed: 1
+   ⚠️  Bottlenecks Identified:
+      • Slow response times - optimize source gathering
+
+📄 Generating research report...
+   ✓ Report saved to: /workspace/project-starter/research_report.md
+
+================================================================================
+RESEARCH REPORT PREVIEW
+================================================================================
+
+# Research Report: The impact of emperor Constantine the Great on the quality of Europe.
+
+## Executive Summary
+Emperor Constantine the Great's reign fundamentally shaped Europe by institutionalizing Christianity, relocating the imperial capital to Constantinople, and establishing precedents for state-church relations, thereby laying the enduring groundwork for its cultural, political, and religious identity.
+
+**Domain:** social_science
+**Credibility Score:** 0.95/1.00
+**Sources Consulted:** 21
+**Research Iterations:** 1
+
+---
+
+## Research Findings
+
+Emperor Constantine the Great's reign, spanning from 306 to 337 CE, represents a pivotal epoch that profoundly shaped the trajectory of Europe. His decisions initiated a comprehensive transformation encompassing the continent's religious landscape, geopolitical configuration, and the fundamental relationship between secular and spiritual authority. By actively promoting Christianity beyond mere toleration through the Edict of Milan (313 CE), Constantine integrated the Church into the state apparatus, providing it with privileges and funding, which dramatically accelerated its growth and established it as Europe's dominant faith. This move not only ended centuries of persecution but also imbued European civilization with a unifying Christian identity that would define its culture, laws, and moral framework for millennia.
+
+A cornerstone of Constantine's impact was the founding of Constantinople in 330 CE. This strategic relocation of the imperial capital eastward not only shifted the geopolitical heart of the Roman Empire but also contributed significantly to the eventual schism between the Western and Eastern Roman Empires. Constantinople emerged as a vibrant hub of culture, economy, and religion, preserving classical learning and Roman legal traditions, thereby profoundly influencing the development of Southeastern Europe and the Near East while the West underwent fragmentation.
+
+Furthermore, Constantine's intervention in
+
+... (report continues, total 6399 characters)
+
+Full report saved to: /workspace/project-starter/research_report.md
+
+================================================================================
+EXECUTION SUMMARY
+================================================================================
+
+  Workflow Metrics:
+   • Total Stages: 6
+   • Research Iterations: 1
+   • Sources Found: 21
+   • Credibility Score: 0.95
+   • Citations: 0
+
+ Execution successful!
