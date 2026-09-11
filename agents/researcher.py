@@ -261,7 +261,7 @@ async def execute_research_loop(
     Returns:
         Dictionary with final answer and iteration history
     """
-    print(f"\n Research Loop: {query[:60]}...")
+    print(f"\n Research Loop: {query}")
     print(f"   Max Iterations: {max_iterations}")
 
     # Create LoopAgent
